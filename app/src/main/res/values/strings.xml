@@ -2,4 +2,6 @@
     <string name="app_name">BeaconHack</string>
     <string name="kontak_apikey">YadFZLSutCGELJAxOaDsERJGgZfmhnTQ</string>
     <string name="scanFailure">Fallo scaneo</string>
+    <string name="notif_title">Beacon</string>
+    <string name="notif_info">Hay algo cerca de ti! Descubrelo!</string>
 </resources>

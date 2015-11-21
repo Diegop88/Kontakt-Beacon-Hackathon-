@@ -10,6 +10,6 @@ import android.content.Intent;
 public class BeaconFinderReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        context.startActivity(new Intent(context, FinderBeacon.class));
+        context.startService(new Intent(context, FinderBeacon.class));
     }
 }
