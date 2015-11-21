@@ -20,6 +20,9 @@ android {
     packagingOptions {
 	    exclude 'main/AndroidManifest.xml'
     }
+	lintOptions {
+	    abortOnError false
+	}
 }
 
 dependencies {
