@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BeaconHack</string>
+    <string name="kontak_apikey">YadFZLSutCGELJAxOaDsERJGgZfmhnTQ</string>
+    <string name="scanFailure">Fallo scaneo</string>
 </resources>
