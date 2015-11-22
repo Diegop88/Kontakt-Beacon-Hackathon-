@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.it.beaconhack.APIs.LoginAPI;
+import com.example.it.beaconhack.Models.Base;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -21,6 +24,11 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getClass().getSimpleName();
@@ -39,6 +47,20 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                LoginAPI api = MyApp.getRetrofit().create(LoginAPI.class);
+                Call<Base> call = api.login("");
+                call.enqueue(new Callback<Base>() {
+                    @Override
+                    public void onResponse(Response<Base> response, Retrofit retrofit) {
+                        startActivity(new Intent(MainActivity.this, Home.class));
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(MainActivity.this, "Ya valiste", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 GraphRequest graphRequest = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -111,6 +133,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void servicio(View view) {
-        startService(new Intent(this, FinderBeacon.class));
+        startActivity(new Intent(this, Home.class));
     }
 }
