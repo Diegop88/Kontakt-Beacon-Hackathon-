@@ -38,3 +38,5 @@ BeaconHack.iml
 .idea/modules.xml
 app/app.iml
 beacon-hack.iml
+
+*.iml
