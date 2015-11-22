@@ -30,6 +30,10 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+import com.proxama.tappoint.auth.AuthListener;
+import com.proxama.tappoint.auth.Authentication;
+import com.proxama.tappoint.error.ApiError;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getClass().getSimpleName();
     CallbackManager callbackManager;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         callbackManager = CallbackManager.Factory.create();
+
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));

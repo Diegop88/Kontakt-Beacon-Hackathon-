@@ -87,8 +87,10 @@ public class FinderBeacon extends Service implements ProximityManager.ProximityL
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(BluetoothUtils.isBluetoothEnabled())
+        if(BluetoothUtils.isBluetoothEnabled()){
             initializeScan();
+
+        }
 
         return START_STICKY;
     }

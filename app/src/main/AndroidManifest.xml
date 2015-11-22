@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:name=".MyApp"
@@ -46,6 +48,55 @@
         <meta-data
             android:name="kontakt.io.API_KEY"
             android:value="@string/kontak_apikey" />
+
+        <uses-feature
+            android:name="android.hardware.bluetooth_le"
+            android:required="true"/>
+
+        <service android:name="com.proxama.tappointauth.sync.SyncService"/>
+        <service android:name="com.proxama.trigger.ble.BleTriggerService"/>
+        <service android:name="com.proxama.ble.BleScannerManagerImpl"></service>
+
+        <receiver android:name="com.proxama.ble.BleScannerBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.proxama.ble.scanner.ACTION_SCHEDULE_SCAN"></action>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.proxama.trigger.ble.BleScanEventReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.proxama.ble.scanner.ACTION_SCAN_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.proxama.trigger.ble.model.dao.BleTriggerProvider"
+            android:authorities="com.example.it.beaconhack.bletriggerprovider"
+            android:exported="false">
+        </provider>
+
+        <receiver android:name="com.example.it.beaconhack.BleTriggerReceiver">
+            <intent-filter>
+                <action android:name="com.proxama.tappoint.action.ACTION_TRIGGERS_DETECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.proxama.tappoint.internal.trigger.module.BleTriggerEventReceiver" >
+            <intent-filter>
+                <action android:name="com.proxama.trigger.ble.processor.TRIGGEREVENTS" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="MarketingActivity"/>
 
     </application>
 
