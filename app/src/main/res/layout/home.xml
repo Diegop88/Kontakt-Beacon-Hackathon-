@@ -4,6 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbProgressIndicator"
+        android:layout_gravity="right"
+        android:indeterminate="false" />
+
     <TextView
         android:id="@+id/listdevices"
         android:layout_width="wrap_content"
