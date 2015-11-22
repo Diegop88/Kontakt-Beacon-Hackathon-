@@ -82,7 +82,7 @@ public class FindingView extends View {
         int value;
 
         public Circulo() {
-            value = 0;
+            value = 1;
         }
 
         synchronized public void update() {

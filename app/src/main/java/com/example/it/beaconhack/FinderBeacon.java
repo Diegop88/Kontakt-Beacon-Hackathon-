@@ -28,6 +28,7 @@ import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.ble.rssi.RssiCalculators;
 import com.kontakt.sdk.android.ble.util.BluetoothUtils;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +54,13 @@ public class FinderBeacon extends Service implements ProximityManager.ProximityL
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         IBeaconScanContext iBeaconScanContext = new IBeaconScanContext.Builder()
-                .setEventTypes(EnumSet.of(EventType.SPACE_ENTERED, EventType.DEVICE_DISCOVERED, EventType.DEVICES_UPDATE, EventType.DEVICE_LOST, EventType.SPACE_ABANDONED))
+                .setEventTypes(Arrays.asList(
+                        EventType.SPACE_ENTERED,
+                        EventType.DEVICE_DISCOVERED,
+                        EventType.DEVICES_UPDATE,
+                        EventType.DEVICE_LOST,
+                        EventType.SPACE_ABANDONED
+                ))
                 .setRssiCalculator(RssiCalculators.newLimitedMeanRssiCalculator(2))
                 .setIBeaconFilters(Arrays.asList(
                         new IBeaconFilter() {
@@ -132,7 +139,10 @@ public class FinderBeacon extends Service implements ProximityManager.ProximityL
                 builder.setSound(alarmSound);
                 builder.setContentTitle(getResources().getString(R.string.notif_title));
                 builder.setContentText(getResources().getString(R.string.notif_info));
-                PendingIntent intencionPendiente = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent intencionPendiente = PendingIntent.getActivity(
+                        this,
+                        0,
+                        new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
                 builder.setContentIntent(intencionPendiente);
                 builder.setAutoCancel(true);
                 manager.notify(ID_NOTIFICACION, builder.build());
