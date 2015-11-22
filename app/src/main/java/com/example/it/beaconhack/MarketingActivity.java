@@ -1,6 +1,7 @@
 package com.example.it.beaconhack;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -24,5 +25,18 @@ public class MarketingActivity extends Activity {
 
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pushMainActivityIntoStack();
+    }
+
+    //push the main activity down the stack, so when user quits the View Ad activity, it goes back to the main
+    private void pushMainActivityIntoStack() {
+        Intent mainActivity = new Intent(this, Home.class);
+        mainActivity.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(mainActivity);
     }
 }
