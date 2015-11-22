@@ -65,31 +65,29 @@ public class BleTriggerReceiver extends BroadcastReceiver {
                 .setContentText(subtitle).setDefaults(NotificationCompat
                         .DEFAULT_ALL);
 
-//        if(! wasShown(id, context)){
-            Bundle extras = new Bundle();
-            extras.putString("title", title);
-            extras.putString("subtitle", subtitle);
-            extras.putString("id", id);
-            extras.putString("image", image);
+        Bundle extras = new Bundle();
+        extras.putString("title", title);
+        extras.putString("subtitle", subtitle);
+        extras.putString("id", id);
+        extras.putString("image", image);
 
 
-            Intent intent = new Intent(context, MarketingActivity.class);
-            intent.setAction(ANDROID_INTENT_ACTION_MAIN);
-            intent.addCategory(ANDROID_INTENT_CATEGORY_LAUNCHER);
-            intent.putExtras(extras);
-            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-            notificationBuilder.setContentIntent(resultPendingIntent);
-            notificationBuilder.setAutoCancel(true);
+        Intent intent = new Intent(context, MarketingActivity.class);
+        intent.putExtras(extras);
+        notificationBuilder.setContentIntent(getPendintIntent(context, intent));
+        notificationBuilder.setAutoCancel(true);
 
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context
-                    .NOTIFICATION_SERVICE);
-            notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
-//        }else{
-//            Log.i("Notificación ya mostrada","Notificación ya mostrada");
-//        }
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context
+                .NOTIFICATION_SERVICE);
+        notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
 
+    }
 
+    private PendingIntent getPendintIntent(Context context, Intent intent) {
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        return resultPendingIntent;
     }
 
     private boolean wasShown(String id, Context context) {
