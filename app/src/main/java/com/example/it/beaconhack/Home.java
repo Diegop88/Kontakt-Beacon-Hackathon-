@@ -7,13 +7,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.example.it.beaconhack.Fragments.InfoFragment;
 import com.example.it.beaconhack.Fragments.LoadingFragment;
@@ -26,9 +25,7 @@ import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
 import com.kontakt.sdk.android.ble.discovery.BluetoothDeviceEvent;
 import com.kontakt.sdk.android.ble.discovery.DistanceSort;
 import com.kontakt.sdk.android.ble.discovery.EventType;
-import com.kontakt.sdk.android.ble.discovery.ibeacon.IBeaconAdvertisingPacket;
 import com.kontakt.sdk.android.ble.discovery.ibeacon.IBeaconDeviceEvent;
-import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilter;
 import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilters;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.ble.rssi.RssiCalculators;
@@ -44,9 +41,7 @@ import com.proxama.tappoint.sync.Synchronisation;
 import com.proxama.tappoint.trigger.Trigger;
 import com.proxama.tappoint.trigger.Triggers;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.lang.annotation.Documented;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,7 +53,7 @@ import java.util.concurrent.TimeUnit;
  * Created by diego on 21/11/15.
  */
 public class Home extends AppCompatActivity implements ProximityManager.ProximityListener, AuthListener, SyncListener,
-        BeaconEventClickListener {
+        BeaconEventClickListener, ActivityListener {
 
     private ProximityManager proximityManager;
     private ScanContext scanContext;
@@ -95,6 +90,8 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
 
     /** Intent filter to listen to the specific beacon event intent. */
     private IntentFilter mBeaconEventFilter;
+
+    private ActivityListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +165,8 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
         });
     }
 
-    private void showLoading() {
+    @Override
+    public void showLoading() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoadingFragment()).commit();
     }
 
@@ -217,6 +215,7 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
     private void showCloserInfo(IBeaconDevice beaconDevice) {
         InfoFragment fragment = new InfoFragment();
         fragment.setBeacon(beaconDevice);
+        fragment.setListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, "Info").commit();
     }
 

@@ -52,20 +52,6 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                LoginAPI api = MyApp.getRetrofit().create(LoginAPI.class);
-                Call<Base> call = api.login("");
-                call.enqueue(new Callback<Base>() {
-                    @Override
-                    public void onResponse(Response<Base> response, Retrofit retrofit) {
-                        startActivity(new Intent(MainActivity.this, Home.class));
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Toast.makeText(MainActivity.this, "Ya valiste", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
                 GraphRequest graphRequest = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -87,10 +73,6 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i("first_name", "-->" + first_name);
                                     Log.i("last_name", "-->" + last_name);
                                     Log.i("age_range", "-->" + age_range);
-
-                                    ImageView imageView = (ImageView) findViewById(R.id.facebook_profile);
-
-                                    Glide.with(MainActivity.this).load("https://graph.facebook.com/"+id+"/picture?type=large").into(imageView);
 
                                     startActivity(new Intent(MainActivity.this, Home.class));
 
@@ -136,9 +118,5 @@ public class MainActivity extends AppCompatActivity {
 
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
-    }
-
-    public void servicio(View view) {
-        startActivity(new Intent(this, Home.class));
     }
 }

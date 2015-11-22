@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.it.beaconhack.APIs.BeaconInfoApi;
+import com.example.it.beaconhack.ActivityListener;
 import com.example.it.beaconhack.Models.Base;
 import com.example.it.beaconhack.MyApp;
 import com.example.it.beaconhack.R;
@@ -25,6 +25,7 @@ import retrofit.Retrofit;
  */
 public class InfoFragment extends Fragment {
     IBeaconDevice iBeaconDevice;
+    private ActivityListener mListener;
 
     public void setBeacon(IBeaconDevice beacon) {
         iBeaconDevice = beacon;
@@ -60,11 +61,9 @@ public class InfoFragment extends Fragment {
         btAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                mListener.showLoading();
             }
         });
-
-
 
         return view;
     }
@@ -86,5 +85,9 @@ public class InfoFragment extends Fragment {
 
     public IBeaconDevice getIbeacon() {
         return iBeaconDevice;
+    }
+
+    public void setListener(ActivityListener l) {
+        mListener = l;
     }
 }
