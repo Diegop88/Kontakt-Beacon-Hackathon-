@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     Glide.with(MainActivity.this).load("https://graph.facebook.com/"+id+"/picture?type=large").into(imageView);
 
+                                    startActivity(new Intent(MainActivity.this, Home.class));
 
                                     // send email and id to your web server
                                 }

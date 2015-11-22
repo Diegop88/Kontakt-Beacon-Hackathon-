@@ -246,7 +246,7 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
 
     @Override
     public void onAuthSuccess() {
-        Toast.makeText(this, "Auth successful", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Auth successful", Toast.LENGTH_LONG).show();
 
         Synchronisation.getSyncManager(this).synchronise(this);
     }
@@ -255,7 +255,7 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
     public void onAuthFailure(ApiError apiError) {
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        Toast.makeText(this, "Auth failed: " + apiError.name(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Auth failed: " + apiError.name(), Toast.LENGTH_LONG).show();
         Log.d(TAG, apiError.getErrorMessage());
     }
 
@@ -266,8 +266,7 @@ public class Home extends AppCompatActivity implements ProximityManager.Proximit
         int numberAdded = syncResult.getTriggersAdded().size();
         int numberRemoved = syncResult.getTriggersRemoved().size();
 
-        Toast.makeText(this, "Sync successful. Added triggers: " + numberAdded + ". Removed triggers: " +
-                numberRemoved, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Sync successful. Added triggers: " + numberAdded + ". Removed triggers: " +numberRemoved, Toast.LENGTH_LONG).show();
         Triggers.getTriggersManager(this).startMonitoring();
     }
 

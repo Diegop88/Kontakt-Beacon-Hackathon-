@@ -7,7 +7,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Funciona!" />
+        android:text="Gracias por tu visita, utiliza tus puntos la próxima vez." />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:id="@+id/bt_aceptar"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/text_view"

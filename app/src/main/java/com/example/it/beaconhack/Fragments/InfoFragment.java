@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.it.beaconhack.APIs.BeaconInfoApi;
@@ -51,21 +52,35 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.info_beacon, container, false);
+
+
+        View view = inflater.inflate(R.layout.info_beacon, container, false);
+
+        Button btAceptar = (Button) view.findViewById(R.id.bt_aceptar);
+        btAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
+
+
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = (TextView) view.findViewById(R.id.text_view);
-
-        if(iBeaconDevice == null)
-            return;
-
-        textView.append(iBeaconDevice.getProximityUUID() + "\n");
-        textView.append(iBeaconDevice.getMajor() + "\n");
-        textView.append(iBeaconDevice.getMinor() + "\n");
+//        TextView textView = (TextView) view.findViewById(R.id.text_view);
+//
+//        if(iBeaconDevice == null)
+//            return;
+//
+//        textView.append(iBeaconDevice.getProximityUUID() + "\n");
+//        textView.append(iBeaconDevice.getMajor() + "\n");
+//        textView.append(iBeaconDevice.getMinor() + "\n");
 
     }
 
