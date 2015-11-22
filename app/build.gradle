@@ -31,4 +31,6 @@ dependencies {
     compile 'com.kontakt.sdk.android:kontakt.io-android-sdk:2.0.0'
     compile 'com.android.support:design:23.1.1'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'jp.wasabeef:glide-transformations:1.2.1'
 }
