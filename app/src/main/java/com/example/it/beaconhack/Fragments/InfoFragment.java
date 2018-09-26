@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.it.beaconhack.APIs.BeaconInfoApi;
 import com.example.it.beaconhack.ActivityListener;
@@ -14,6 +16,8 @@ import com.example.it.beaconhack.Models.Base;
 import com.example.it.beaconhack.MyApp;
 import com.example.it.beaconhack.R;
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+
+import java.util.concurrent.TimeoutException;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -57,8 +61,7 @@ public class InfoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.info_beacon, container, false);
 
-        Button btAceptar = (Button) view.findViewById(R.id.bt_aceptar);
-        btAceptar.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.bt_aceptar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.showLoading();
@@ -72,14 +75,18 @@ public class InfoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        TextView textView = (TextView) view.findViewById(R.id.text_view);
-//
-//        if(iBeaconDevice == null)
-//            return;
-//
-//        textView.append(iBeaconDevice.getProximityUUID() + "\n");
-//        textView.append(iBeaconDevice.getMajor() + "\n");
-//        textView.append(iBeaconDevice.getMinor() + "\n");
+        view.findViewById(R.id.bt_aceptar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.showLoading();
+            }
+        });
+
+        TextView major = (TextView) view.findViewById(R.id.major);
+        major.append(iBeaconDevice != null ? String.valueOf(iBeaconDevice.getMajor()) : null);
+
+        TextView minor = (TextView) view.findViewById(R.id.minor);
+        minor.append(iBeaconDevice != null ? String.valueOf(iBeaconDevice.getMinor()) : null);
 
     }
 

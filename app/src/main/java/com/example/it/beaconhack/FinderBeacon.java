@@ -134,7 +134,7 @@ public class FinderBeacon extends Service implements ProximityManager.ProximityL
 
             case IBEACON:
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-                builder.setSmallIcon(R.mipmap.ic_launcher);
+                builder.setSmallIcon(R.mipmap.monkey_96);
                 builder.setVibrate(new long[]{1000, 1000});
                 builder.setLights(Color.RED, 3000, 3000);
                 Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

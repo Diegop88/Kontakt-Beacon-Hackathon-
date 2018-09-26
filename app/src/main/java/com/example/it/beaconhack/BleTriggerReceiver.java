@@ -61,7 +61,7 @@ public class BleTriggerReceiver extends BroadcastReceiver {
 
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher).setContentTitle(title)
+                .setSmallIcon(R.mipmap.monkey_96).setContentTitle(title)
                 .setContentText(subtitle).setDefaults(NotificationCompat
                         .DEFAULT_ALL);
 

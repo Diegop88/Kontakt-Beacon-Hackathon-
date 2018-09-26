@@ -34,9 +34,9 @@ public class FindingView extends View {
         circulos.add(new Circulo());
 
         cPaint = new Paint();
-        cPaint.setStrokeWidth(2);
+        cPaint.setStrokeWidth(15);
         cPaint.setStyle(Paint.Style.STROKE);
-        cPaint.setColor(Color.BLACK);
+        cPaint.setColor(getResources().getColor(R.color.colorPrimaryDark));
         cPaint.setAntiAlias(true);
 
         Runnable animator = new Runnable() {
